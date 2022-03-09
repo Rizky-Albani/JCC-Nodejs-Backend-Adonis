@@ -24,4 +24,4 @@ switch(args[2]){
     break
 }
 
-//persegiPanjang tidak berhasil
+//rizky_Albani
