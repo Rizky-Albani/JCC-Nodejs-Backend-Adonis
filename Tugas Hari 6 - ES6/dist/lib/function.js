@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.scoreCheck = exports.sapa = exports.filterData = exports.convert = void 0;
+exports.sapa = exports.filterData = exports.convert = exports.checkScore = void 0;
 
 var sapa = function sapa(nama) {
   return "halo selamat pagi, " + nama;
@@ -21,7 +21,7 @@ var convert = function convert(nama, domisili, umur) {
 
 exports.convert = convert;
 
-var scoreCheck = function scoreCheck() {
+var checkScore = function checkScore() {
   var string = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
   var array = string.split(":").join().split(",");
   var use = [];
@@ -41,7 +41,7 @@ var scoreCheck = function scoreCheck() {
   return obj;
 };
 
-exports.scoreCheck = scoreCheck;
+exports.checkScore = checkScore;
 
 var filterData = function filterData(kelas) {
   var array = arguments.length <= 1 ? undefined : arguments[1];

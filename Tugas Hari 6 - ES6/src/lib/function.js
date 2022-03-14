@@ -9,7 +9,7 @@ export const convert = (nama, domisili, umur) => {
     }
 }
 
-export const scoreCheck = (string = "") => {
+export const checkScore = (string = "") => {
     const array = string.split(":").join().split(",")
     let use = []
     for (let i = 1; i < array.length; i+=2) {

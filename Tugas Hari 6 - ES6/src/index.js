@@ -1,7 +1,7 @@
 import {
     sapa,
     convert,
-    scoreCheck,
+    checkScore,
     filterData
 } from "./lib/function"
 
@@ -18,9 +18,9 @@ switch (command){
         let[nama, domisili, umur] = parameter
         console.log(convert(nama, domisili, umur))
         break
-    case "scoreCheck":
+    case "checkScore":
         const string = args[1]
-        console.log(scoreCheck(string))
+        console.log(checkScore(string))
         break
     case "filterData":
         const data = [

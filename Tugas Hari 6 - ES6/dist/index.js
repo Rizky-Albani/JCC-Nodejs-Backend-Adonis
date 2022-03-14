@@ -34,9 +34,9 @@ switch (command) {
     console.log((0, _function.convert)(nama, domisili, umur));
     break;
 
-  case "scoreCheck":
+  case "checkScore":
     var string = args[1];
-    console.log((0, _function.scoreCheck)(string));
+    console.log((0, _function.checkScore)(string));
     break;
 
   case "filterData":
