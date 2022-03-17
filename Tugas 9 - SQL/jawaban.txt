@@ -1,0 +1,38 @@
+1. Buat database myshop:
+	#jawab
+	create database myshop;
+
+2. Buat table di database mysop:
+	#jawab
+	use myshop;
+	create table users(id INT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(255), email varchar(255), password varchar(255));
+	create table items(id INT NULL AUTO_INCREMENT PRIMARY KEY, name varchar(255), description varchar(255), price int, stock int, category_id int, foreign key(category_id) references categories(id));
+	create table categories(id INT AUTO_INCREMENT PRIMARY KEY, name varchar(255));
+
+3. Insert data:
+	#jawab
+	INSERT INTO users(name, email, password) values('John Doe', 'john@doe.com', 'john123'), ('Jane Doe', 'jane@doe.com', 'jenita123');
+	INSERT INTO categories(name) values('gadget'), ('cloth'), ('men'), ('women'), ('branded');
+	INSERT INTO items(name, description, price, stock, category_id) values('Sumsang b50', 'hape keren dari merek sumsang', 4000000, 100, 1),('Uniklooh', 'baju keren dari brand ternama', 500000, 50, 2),('IMHO Watch', 'jam tangan anak yang jujur banget', 2000000, 10, 1);
+
+4. Menampilkan data:
+	a. Buatlah sebuah query untuk mendapatkan data seluruh user pada table users. Sajikan semua field pada table users KECUALI password nya.
+		#jawab
+		select id, name, email from users;
+	b. Buatlah sebuah query untuk mendapatkan data item pada table items yang memiliki harga di atas 1000000 (satu juta).
+		#jawab
+		select * from items where price > 1000000;
+	   Buat sebuah query untuk mengambil data item pada table items yang memiliki name serupa atau mirip (like) dengan kata kunci “uniklo”, “watch”, atau “sang” (pilih salah satu saja).
+		#jawab
+		select * from items where name LIKE '%uniklo%';
+	c. Menampilkan data items join dengan kategori
+	   Buatlah sebuah query untuk menampilkan data items yang dilengkapi dengan data nama kategori di masing-masing items. Berikut contoh tampilan data yang ingin didapatkan
+		#jawab
+		select items.id, items.name, items.description, items.price, items.stock, items.category_id, categories.name from items INNER JOIN categories ON items.category_id = categories.id;
+
+5. Ubahlah data pada table items untuk item dengan nama sumsang harganya (price) menjadi 2500000. Masukkan query pada text jawaban di nomor ke 5.
+	#jawab
+	UPDATE items SET price = 2500000 WHERE name = 'Sumsang b50';
+
+5. 
+		
