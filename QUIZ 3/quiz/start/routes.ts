@@ -20,6 +20,8 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/', async () => {
-  return { hello: 'world' }
-})
+Route.get('/movies', 'MoviesController.index').as('movies.index')
+Route.get('/movies/:id', 'MoviesController.show').as('movies.show')
+Route.post('/movies', 'MoviesController.store').as('movies.store')
+Route.put('/movies/:id', 'MoviesController.update').as('movies.update')
+Route.delete('/movies/:id', 'MoviesController.destroy').as('movies.destroy')
