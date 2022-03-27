@@ -27,6 +27,7 @@ export default class MovieValidator {
     title: schema.string(),
     resume: schema.string(),
     release_date: schema.date(),
+    genre_id: schema.number(),
   })
 
   /**

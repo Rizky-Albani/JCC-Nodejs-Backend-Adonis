@@ -5,7 +5,7 @@ import Database from '@ioc:Adonis/Lucid/Database'
 export default class MoviesController {
     public async index({response}: HttpContextContract){
         try{
-            let movie = await Database.from('movies').select('id', 'tittle', 'resume', 'release_date')
+            let movie = await Database.from('movies').select('id', 'tittle', 'resume', 'release_date', 'genre_id')
             response.status(200).json({message: "success", data: movie})
         }catch(error){
             console.log(error)
@@ -19,6 +19,7 @@ export default class MoviesController {
                 tittle: request.input('tittle'),
                 resume: request.input('resume'),
                 release_date: request.input('release_date'),
+                genre_id: request.input('genre_id'),
             })
             response.created({message: 'created', newData: newMovies })
         }catch(error){

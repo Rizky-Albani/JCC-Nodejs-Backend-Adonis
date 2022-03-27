@@ -9,6 +9,7 @@ export default class Movies extends BaseSchema {
       table.string('tittle').notNullable()
       table.text('resume').notNullable()
       table.dateTime('release_date').notNullable()
+      table.integer('genre_id').unsigned().references('id').inTable('genres').onUpdate('NO ACTION').onDelete('SET NULL')
       table.timestamps(true, true)
     })
   }
