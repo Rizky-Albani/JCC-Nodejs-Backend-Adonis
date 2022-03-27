@@ -20,6 +20,12 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
+Route.get('/genres', 'GenresController.index').as('genres.index')
+Route.get('/genres/:id', 'GenresController.show').as('genres.show')
+Route.post('/genres', 'GenresController.store').as('genres.store')
+Route.put('/genres/:id', 'GenresController.update').as('genres.update')
+Route.delete('/genres/:id', 'GenresController.destroy').as('genres.destroy')
+
 Route.get('/movies', 'MoviesController.index').as('movies.index')
 Route.get('/movies/:id', 'MoviesController.show').as('movies.show')
 Route.post('/movies', 'MoviesController.store').as('movies.store')

@@ -1,7 +1,7 @@
 import { schema } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class MovieValidator {
+export default class GenreValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   /*
@@ -24,9 +24,7 @@ export default class MovieValidator {
    *    ```
    */
   public schema = schema.create({
-    title: schema.string(),
-    resume: schema.string(),
-    release_date: schema.date(),
+    name: schema.string(),
   })
 
   /**
