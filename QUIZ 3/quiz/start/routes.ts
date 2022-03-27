@@ -20,10 +20,6 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/venues', 'VenuesController.index')
-Route.get('/venues/:id', 'VenuesController.show')
-Route.post('/venues', 'VenuesController.store')
-Route.put('/venues/:id', 'VenuesController.update')
-Route.delete('/venues/:id', 'VenuesController.destroy')
-
-Route.resource('/fields', 'VenuesController')
+Route.get('/', async () => {
+  return { hello: 'world' }
+})

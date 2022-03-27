@@ -1,5 +1,5 @@
 {
-  "name": "rest-api-adonis",
+  "name": "quiz",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -19,6 +19,7 @@
     "@adonisjs/core": "^5.6.2",
     "@adonisjs/lucid": "^17.1.0",
     "@adonisjs/repl": "^3.1.9",
+    "luxon": "^2.3.1",
     "mysql": "^2.18.1",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
