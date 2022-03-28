@@ -1,7 +1,7 @@
-import { schema, rules } from '@ioc:Adonis/Core/Validator'
+import { schema } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class VenueValidator {
+export default class FieldValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   /*
@@ -25,12 +25,8 @@ export default class VenueValidator {
    */
   public schema = schema.create({
     name: schema.string(),
-    address: schema.string(),
-    phone: schema.string({}, [
-      rules.mobile({
-        locales: ['id-ID']
-      })
-    ])
+    type: schema.string(),
+    venue_id: schema.number(),
   })
 
   /**
@@ -46,5 +42,3 @@ export default class VenueValidator {
    */
   public messages = {}
 }
-
-//new commit
