@@ -26,6 +26,6 @@ Route.post('/venues', 'VenuesController.store')
 Route.put('/venues/:id', 'VenuesController.update')
 Route.delete('/venues/:id', 'VenuesController.destroy')
 
-Route.resource('/fields', 'VenuesController')
+Route.resource('venues.fields', 'FieldsController')
 
 //new commit
