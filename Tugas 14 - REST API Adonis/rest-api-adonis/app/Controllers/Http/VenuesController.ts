@@ -7,20 +7,21 @@ import Venue from 'App/Models/Venue';
 export default class VenuesController {
     public async index({response, request}: HttpContextContract){
         try{
-            if(request.qs().name){
-                let name = request.qs().name
+            //if(request.qs().name){
+                //let name = request.qs().name
                 //QBD
                 //let venue = await Database.from('venues').select('id', 'name', 'address', 'phone').where('name', name)
 
                 //Model
-                let venueFilteredName = await Venue.findBy('name', name)
-                response.status(200).json({message: "success", data: venueFilteredName})
-            }
+                //let venueFilteredName = await Venue.findBy('name', name)
+                //let venueFilteredName = await Venue.query().preload('fields')
+                //response.status(200).json({message: "success", data: venueFilteredName})
+            //}
             //QBD
             //let venue = await Database.from('venues').select('id', 'name', 'address', 'phone')
 
             //Model
-            let venue = await Venue.all()
+            let venue = await Venue.query().preload('fields')
             response.status(200).json({message: "success", data: venue})
         }catch(error){
             console.log(error)
@@ -54,7 +55,9 @@ export default class VenuesController {
     public async show({params, response}: HttpContextContract){
         //let venue = await Database.from('venues').where('id',params.id).select('id', 'name', 'address', 'phone').firstOrFail
 
-        let venue = await Venue.find(params)
+        //let venue = await Venue.find(params)
+
+        let venue = await Venue.query().where('id', params.id).orWhereNull('id').preload('fields')
         return response.status(200).json({message: "success", data: venue})
     }
 

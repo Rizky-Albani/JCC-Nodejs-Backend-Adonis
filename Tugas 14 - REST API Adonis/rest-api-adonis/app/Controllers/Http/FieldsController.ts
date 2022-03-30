@@ -8,7 +8,10 @@ export default class FieldsController {
         try{
             //let field = await Database.from('fields').select('id', 'name', 'type', 'venue_id')
 
-            let field = await Field.all()
+            //let field = await Field.all()
+
+            let field = await Field.query().preload('venue')
+
             response.status(200).json({message: "success", data: field})
         }catch(error){
             console.log(error)
@@ -38,7 +41,8 @@ export default class FieldsController {
 
     public async show({params, response}: HttpContextContract){
         //let field = await Database.from('fields').where('id',params.id).select('id', 'name', 'type', 'venue_id').firstOrFail
-        let field = await Field.find(params)
+        //let field = await Field.find(params)
+        let field = await Field.query().where('id', params.id).orWhereNull('id').preload('venue')
         return response.status(200).json({message: "success", data: field})
     }
 
