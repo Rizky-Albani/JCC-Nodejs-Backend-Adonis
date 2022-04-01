@@ -38,7 +38,11 @@ export default class FieldsController {
     public async show({params, response}: HttpContextContract){
         //let field = await Database.from('fields').where('id',params.id).select('id', 'name', 'type', 'venue_id').firstOrFail
         //let field = await Field.find(params)
-        let field = await Field.query().where('id', params.id).orWhereNull('id').preload('venue').preload('bookings')
+        let field = await Field.query().where('id', params.id).orWhereNull('id').preload('venue', (venueQuery) => {
+            venueQuery.select('name', 'address', 'phone')
+        }).preload('bookings', (bookingQuery) => {
+            bookingQuery.select('id', 'play_date_start', 'play_date_end')
+        }).firstOrFail()
         return response.status(200).json({message: "berhasil get data booking", data: field})
     }
 

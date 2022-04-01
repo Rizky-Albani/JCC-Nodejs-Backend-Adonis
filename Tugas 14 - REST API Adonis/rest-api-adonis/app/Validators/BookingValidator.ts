@@ -27,7 +27,9 @@ export default class BookingValidator {
     play_date_start: schema.date({}, [
       rules.after('today')
     ]),
-    play_date_end: schema.date()
+    play_date_end: schema.date({}, [
+      rules.after('today')
+    ])
   })
 
   /**

@@ -56,7 +56,9 @@ export default class VenuesController {
         //let venue = await Database.from('venues').where('id',params.id).select('id', 'name', 'address', 'phone').firstOrFail
 
         //let venue = await Venue.find(params)
-        let venue = await Venue.query().where('id', params.id).from('venues').select('venues.id', 'venues.name', 'venues.address', 'venues.phone').preload('fields')
+        let venue = await Venue.query().where('id', params.id).from('venues').select('venues.id', 'venues.name', 'venues.address', 'venues.phone').preload('fields', (fieldQuery) => {
+            fieldQuery.select("id", "name", "type")
+        }).firstOrFail()
         //let venue = await Venue.query().where('id', params.id).orWhereNull('id').preload('fields')
         return response.status(200).json({message: "success", data: venue})
     }

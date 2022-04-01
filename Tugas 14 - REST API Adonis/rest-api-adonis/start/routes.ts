@@ -32,6 +32,7 @@ Route.resource('fields.bookings', 'BookingsController').middleware({'*': "auth"}
 
 Route.get('/fields/:id', 'FieldsController.show').middleware('auth')
 Route.get('/bookings/:id', 'BookingsController.show').middleware('auth')
+Route.put('/bookings/:id', 'BookingsController.join').middleware('auth')
 
 
 Route.post('/register', 'AuthController.register').as('auth.register')

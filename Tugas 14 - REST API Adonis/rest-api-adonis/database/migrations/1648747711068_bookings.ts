@@ -9,6 +9,7 @@ export default class Bookings extends BaseSchema {
       table.dateTime('play_date_start').notNullable
       table.string('play_date_end').notNullable
       table.integer('field_id').unsigned().references('fields.id').onDelete('CASCADE')
+      table.integer('user_id').unsigned().references('users.id').onDelete('CASCADE')
       table.timestamps(true, true)
     })
   }
