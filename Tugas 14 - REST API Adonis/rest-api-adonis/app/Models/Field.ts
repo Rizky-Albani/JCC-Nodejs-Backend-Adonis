@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import Venue from './Venue'
+import Booking from './Booking'
 
 export default class Field extends BaseModel {
   @column({ isPrimary: true })
@@ -13,16 +14,17 @@ export default class Field extends BaseModel {
   public type: Array<string> = ['futsal', 'mini soccer', 'basketball' ]
 
   @column()
-  public venue_id: number
-
+  public venueId: number
+  
+  @belongsTo(() => Venue)
+  public venue: BelongsTo<typeof Venue>
+  
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @belongsTo(() => Venue,{
-    foreignKey: 'venue_id',
-  })
-  public venue: BelongsTo<typeof Venue>
+  @hasMany(() => Booking)
+  public bookings: HasMany<typeof Booking>
 }

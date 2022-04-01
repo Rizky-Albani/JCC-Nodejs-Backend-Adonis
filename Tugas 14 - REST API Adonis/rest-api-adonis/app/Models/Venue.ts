@@ -3,9 +3,7 @@ import { BaseModel, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import Field from './Field'
 
 export default class Venue extends BaseModel {
-  @hasMany(() => Field, {
-    foreignKey: 'venue_id',
-  })
+  @hasMany(() => Field)
   public fields: HasMany<typeof Field>
   
   @column({ isPrimary: true })

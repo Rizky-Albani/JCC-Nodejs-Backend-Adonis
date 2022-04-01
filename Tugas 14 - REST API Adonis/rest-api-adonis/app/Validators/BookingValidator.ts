@@ -1,7 +1,7 @@
-import { schema } from '@ioc:Adonis/Core/Validator'
+import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class FieldValidator {
+export default class BookingValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   /*
@@ -24,8 +24,10 @@ export default class FieldValidator {
    *    ```
    */
   public schema = schema.create({
-    name: schema.string(),
-    type: schema.string()
+    play_date_start: schema.date({}, [
+      rules.after('today')
+    ]),
+    play_date_end: schema.date()
   })
 
   /**

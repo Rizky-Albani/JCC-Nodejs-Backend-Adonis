@@ -5,13 +5,13 @@ import Database from '@ioc:Adonis/Lucid/Database';
 import Venue from 'App/Models/Venue';
 
 export default class VenuesController {
-    public async index({response, request}: HttpContextContract){
+    public async index({response, request, params}: HttpContextContract){
         try{
             //if(request.qs().name){
                 //let name = request.qs().name
                 //QBD
                 //let venue = await Database.from('venues').select('id', 'name', 'address', 'phone').where('name', name)
-
+                
                 //Model
                 //let venueFilteredName = await Venue.findBy('name', name)
                 //let venueFilteredName = await Venue.query().preload('fields')
@@ -21,14 +21,15 @@ export default class VenuesController {
             //let venue = await Database.from('venues').select('id', 'name', 'address', 'phone')
 
             //Model
-            let venue = await Venue.query().preload('fields')
+
+            let venue = await Venue.query().from('venues').preload('fields')
             response.status(200).json({message: "success", data: venue})
         }catch(error){
             console.log(error)
         }
     }
     
-    public async store({response, request}: HttpContextContract){
+    public async store({response, request, auth}: HttpContextContract){
         try{
             await request.validate(VenueValidator);
             //QBD
@@ -37,13 +38,12 @@ export default class VenuesController {
             //     address: request.input('address'),
             //     phone: request.input('phone'),
             // })
-            
+
             //model
             let newVenue = new Venue();
             newVenue.name = request.input('name');
             newVenue.address = request.input('address')
             newVenue.phone = request.input('phone')
-
             await newVenue.save();
 
             response.created({message: 'created'})
@@ -56,8 +56,8 @@ export default class VenuesController {
         //let venue = await Database.from('venues').where('id',params.id).select('id', 'name', 'address', 'phone').firstOrFail
 
         //let venue = await Venue.find(params)
-
-        let venue = await Venue.query().where('id', params.id).orWhereNull('id').preload('fields')
+        let venue = await Venue.query().where('id', params.id).from('venues').select('venues.id', 'venues.name', 'venues.address', 'venues.phone').preload('fields')
+        //let venue = await Venue.query().where('id', params.id).orWhereNull('id').preload('fields')
         return response.status(200).json({message: "success", data: venue})
     }
 

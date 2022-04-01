@@ -20,12 +20,20 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/venues', 'VenuesController.index')
-Route.get('/venues/:id', 'VenuesController.show')
-Route.post('/venues', 'VenuesController.store')
-Route.put('/venues/:id', 'VenuesController.update')
-Route.delete('/venues/:id', 'VenuesController.destroy')
+Route.get('/venues', 'VenuesController.index').middleware('auth')
+Route.get('/venues/:id', 'VenuesController.show').middleware('auth')
+Route.post('/venues', 'VenuesController.store').middleware('auth')
+Route.put('/venues/:id', 'VenuesController.update').middleware('auth')
+Route.delete('/venues/:id', 'VenuesController.destroy').middleware('auth')
 
-Route.resource('venues.fields', 'FieldsController')
+Route.resource('venues.fields', 'FieldsController').middleware({'*': "auth"})
 
+Route.resource('fields.bookings', 'BookingsController').middleware({'*': "auth"})
+
+Route.get('/fields/:id', 'FieldsController.show').middleware('auth')
+Route.get('/bookings/:id', 'BookingsController.show').middleware('auth')
+
+
+Route.post('/register', 'AuthController.register').as('auth.register')
+Route.post('/login', 'AuthController.login').as('auth.login')
 //new commit
