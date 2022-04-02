@@ -15,10 +15,10 @@ export default class Booking extends BaseModel {
   public id: number
 
   @column.dateTime()
-  public play_date_start: DateTime
+  public playDateStart: DateTime
 
   @column()
-  public play_date_end: string
+  public playDateEnd: DateTime
 
   @column()
   public fieldId: number

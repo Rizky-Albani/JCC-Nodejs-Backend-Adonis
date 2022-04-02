@@ -20,21 +20,21 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/venues', 'VenuesController.index').middleware('auth')
-Route.get('/venues/:id', 'VenuesController.show').middleware('auth')
-Route.post('/venues', 'VenuesController.store').middleware('auth')
-Route.put('/venues/:id', 'VenuesController.update').middleware('auth')
-Route.delete('/venues/:id', 'VenuesController.destroy').middleware('auth')
+Route.get('/venues', 'VenuesController.index').middleware(['auth', 'verify', 'owner'])
+Route.get('/venues/:id', 'VenuesController.show').middleware(['auth', 'verify', 'owner'])
+Route.post('/venues', 'VenuesController.store').middleware(['auth', 'verify', 'owner'])
+Route.put('/venues/:id', 'VenuesController.update').middleware(['auth', 'verify', 'owner'])
+Route.delete('/venues/:id', 'VenuesController.destroy').middleware(['auth', 'verify', 'owner'])
 
-Route.resource('venues.fields', 'FieldsController').middleware({'*': "auth"})
+Route.resource('venues.fields', 'FieldsController').middleware({'*': ['auth', 'verify']})
 
-Route.resource('fields.bookings', 'BookingsController').middleware({'*': "auth"})
+Route.resource('fields.bookings', 'BookingsController').middleware({'*': ['auth', 'verify']})
 
-Route.get('/fields/:id', 'FieldsController.show').middleware('auth')
-Route.get('/bookings/:id', 'BookingsController.show').middleware('auth')
-Route.put('/bookings/:id', 'BookingsController.join').middleware('auth')
-
+Route.get('/fields/:id', 'FieldsController.show').middleware(['auth', 'verify'])
+Route.get('/bookings/:id', 'BookingsController.show').middleware(['auth', 'verify', 'user'])
+Route.put('/bookings/:id/join', 'BookingsController.join').middleware(['auth', 'verify', 'user'])
+Route.put('/bookings/:id/unjoin', 'BookingsController.unjoin').middleware(['auth', 'verify', 'user'])
 
 Route.post('/register', 'AuthController.register').as('auth.register')
 Route.post('/login', 'AuthController.login').as('auth.login')
-//new commit
+Route.post('/otp-verification', 'AuthController.otp_verification').as('auth.otp_verification')

@@ -9,9 +9,9 @@ export default class BookingsController {
             await request.validate(BookingValidator);
             const user = auth.user!
             const field = await Field.findByOrFail('id', params.field_id)
-            const play_date_start = request.input('play_date_start');
-            const play_date_end = request.input('play_date_end')
-            const newBooking = await field?.related('bookings').create({ play_date_start, play_date_end });
+            const playDateStart = request.input('play_date_start');
+            const playDateEnd = request.input('play_date_end')
+            const newBooking = await field?.related('bookings').create({ playDateStart, playDateEnd });
             user.related('myBooking').save(newBooking)
             await newBooking.save();
 
@@ -30,13 +30,25 @@ export default class BookingsController {
         return response.status(200).json({message: "berhasil get data booking by id", data: booking})
     }
 
-    public async join({request, response, params, auth}){
+    public async join({response, params, auth}){
         try{
             const booking = await Booking.findOrFail(params.id)
             let user = auth.user!
 
             await booking.related('player').attach([user.id])
             response.ok({message:'berhasil join booking'})
+        }catch (error){
+            response.badRequest({message: error.message})
+        }
+    }
+
+    public async unjoin({response, params, auth}){
+        try{
+            const booking = await Booking.findOrFail(params.id)
+            let user = auth.user!
+
+            await booking.related('player').detach([user.id])
+            response.ok({message:'berhasil unjoin!'})
         }catch (error){
             response.badRequest({message: error.message})
         }

@@ -9,6 +9,8 @@ export default class UsersSchema extends BaseSchema {
       table.string('name').notNullable
       table.string('email', 255).notNullable()
       table.string('password', 180).notNullable()
+      table.enum('role', ["user", "venue_owner", "admin"]).notNullable
+      table.boolean('is_verified').defaultTo(false)
       table.string('remember_me_token').nullable()
       table.timestamps(true, true)
     })
