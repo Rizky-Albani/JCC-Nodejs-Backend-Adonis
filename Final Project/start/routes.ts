@@ -20,6 +20,10 @@
 
 import Route from '@ioc:Adonis/Core/Route'
 
+Route.get('/',async ({ response }) => {
+    response.redirect().toPath('/docs/')
+})
+
 Route.group(() => {
     Route.get('/venues', 'VenuesController.index').middleware(['auth', 'verify', 'owner'])
     Route.get('/venues/:id', 'VenuesController.show').middleware(['auth', 'verify', 'owner'])
@@ -44,5 +48,4 @@ Route.group(() => {
 
     Route.get('/schedule', 'BookingsController.schedule').middleware(['auth', 'verify', 'user'])
 
-    Route.get('/api/hello', 'TestController.hello')
 }).prefix('/api/v1')
